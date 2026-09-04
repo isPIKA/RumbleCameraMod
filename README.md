@@ -1,17 +1,27 @@
 # RumbleCameraMod
 
-A lightweight [MelonLoader](https://github.com/LavaGang/MelonLoader) mod for **Rumble Club** that lets you adjust the gameplay camera distance while preserving the game's original top-down angle.
+A lightweight [MelonLoader](https://github.com/LavaGang/MelonLoader) mod for **Rumble Club** that adjusts the gameplay camera distance while preserving the original top-down angle.
 
 > [!IMPORTANT]
 > This is an unofficial community project and is not affiliated with or endorsed by Lightfox Games, Rumble Club, or MelonLoader. Use mods only where the game's rules permit them.
 
+## Download
+
+**[Download RumbleCameraMod v1.3](https://github.com/isPIKA/RumbleCameraMod/raw/refs/heads/main/download/RumbleCameraMod.dll)**
+
+SHA-256:
+
+```text
+a3cb2f820ea827064d06dd465aa7d8e2886b0c8226ca198a7d4e1a0f1874a6ad
+```
+
 ## Features
 
 - Adjust camera distance in real time
-- Preserve the original top-down viewing angle
+- Preserve the game's original top-down viewing angle
 - Reset instantly to the original distance
-- Supports the game's grounded Cinemachine camera
-- Makes no changes to punch strength, movement, networking, or other gameplay mechanics
+- Support the grounded Cinemachine camera
+- No changes to punch strength, movement, networking, or other gameplay mechanics
 
 ## Controls
 
@@ -26,32 +36,43 @@ The distance multiplier is limited to **0.5×–3.0×**.
 
 - Windows
 - A legitimate installation of Rumble Club
-- MelonLoader 0.7.3 or a compatible version
-- .NET 6 SDK to build the project
-- Visual Studio 2022 with the **.NET desktop development** workload
+- [MelonLoader 0.7.3](https://github.com/LavaGang/MelonLoader/releases) or a compatible version
+- Rumble Club started at least once after installing MelonLoader
 
-Tested with:
-
-- Rumble Club 1.9.2
-- Unity 2022.3.62f2
-- MelonLoader 0.7.3 Open Beta
-- IL2CPP x64 / .NET 6 runtime
-
-Game or loader updates may require the mod to be rebuilt or updated.
+Tested with Rumble Club 1.9.2, Unity 2022.3.62f2, MelonLoader 0.7.3 Open Beta, and IL2CPP x64 / .NET 6.
 
 ## Installation
 
-1. Install MelonLoader into the Rumble Club game directory.
-2. Start the game once and close it. This generates the required IL2CPP assemblies and the `Mods` folder.
-3. Build this project, or obtain `RumbleCameraMod.dll` from a trusted release.
-4. Copy only `RumbleCameraMod.dll` into:
+### 1. Install MelonLoader
+
+1. Download the installer from the official [MelonLoader releases page](https://github.com/LavaGang/MelonLoader/releases).
+2. Run the installer.
+3. Select `Rumble Club.exe`, normally located at:
+
+   ```text
+   C:\Program Files (x86)\Steam\steamapps\common\Rumble Club\Rumble Club.exe
+   ```
+
+4. Complete the installation.
+5. Start Rumble Club once, wait for the main menu, and close it. MelonLoader will create the `Mods` folder and required IL2CPP files.
+
+### 2. Install RumbleCameraMod
+
+1. [Download RumbleCameraMod.dll](https://github.com/isPIKA/RumbleCameraMod/raw/refs/heads/main/download/RumbleCameraMod.dll).
+2. Copy `RumbleCameraMod.dll` into:
 
    ```text
    C:\Program Files (x86)\Steam\steamapps\common\Rumble Club\Mods
    ```
 
-5. Start Rumble Club normally through Steam. No separate DLL injector is required.
-6. Confirm that the MelonLoader console reports `Top-Down Camera Mod v1.3 loaded.`.
+3. Start Rumble Club normally through Steam.
+4. Confirm that the MelonLoader console reports:
+
+   ```text
+   Top-Down Camera Mod v1.3 loaded.
+   ```
+
+No separate DLL injector is required. MelonLoader automatically loads the mod from the `Mods` folder.
 
 ### Uninstall
 
@@ -59,26 +80,32 @@ Delete `RumbleCameraMod.dll` from the game's `Mods` folder.
 
 ## Building from source
 
-1. Install Rumble Club and MelonLoader.
-2. Start the game once so MelonLoader creates `MelonLoader\Il2CppAssemblies`.
-3. Install the .NET 6 SDK and Visual Studio 2022.
-4. Clone this repository:
+### Build requirements
+
+- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- Visual Studio 2022 with the **.NET desktop development** workload
+- Rumble Club with MelonLoader installed
+- Generated files in `Rumble Club\MelonLoader\Il2CppAssemblies`
+
+### Steps
+
+1. Clone the repository:
 
    ```powershell
    git clone https://github.com/isPIKA/RumbleCameraMod.git
    cd RumbleCameraMod
    ```
 
-5. Open `RumbleCameraMod.slnx` in Visual Studio.
-6. Select the **Release** configuration.
-7. Choose **Build → Rebuild Solution**.
-8. Find the compiled mod at:
+2. Open `RumbleCameraMod.slnx` in Visual Studio.
+3. Select the **Release** configuration.
+4. Choose **Build → Rebuild Solution**.
+5. Find the compiled mod at:
 
    ```text
    RumbleCameraMod\bin\Release\net6.0\RumbleCameraMod.dll
    ```
 
-The project defaults to Steam's standard Windows installation path. For a custom game location, set the MSBuild property `RumbleClubDir`:
+The project defaults to Steam's standard Windows installation path. For a custom location, pass `RumbleClubDir`:
 
 ```powershell
 dotnet build -c Release -p:RumbleClubDir="D:\Games\Steam\steamapps\common\Rumble Club"
@@ -86,27 +113,27 @@ dotnet build -c Release -p:RumbleClubDir="D:\Games\Steam\steamapps\common\Rumble
 
 ## Troubleshooting
 
-### References cannot be found
+### Missing references when building
 
-Ensure MelonLoader has been installed and the game has been started at least once. The project expects generated assemblies under:
+Start the game once after installing MelonLoader. The project expects generated assemblies under:
 
 ```text
 Rumble Club\MelonLoader\Il2CppAssemblies
 ```
 
-For a non-standard Steam path, set `RumbleClubDir` as shown in the build instructions.
+For a custom installation path, set `RumbleClubDir` as shown above.
 
 ### The mod loads, but the camera does not change
 
-Enter a match before using the controls. The grounded Cinemachine virtual camera may not exist while the game is still in menus.
+Enter a match before using the controls. The grounded Cinemachine virtual camera may not exist in the menus.
 
-### The mod stops working after an update
+### The mod stops working after a game update
 
-Start the game once without the mod so MelonLoader can regenerate its IL2CPP assemblies, then rebuild the project against the new files.
+Start the game once without the mod so MelonLoader can regenerate its IL2CPP assemblies, then rebuild the project.
 
 ## Privacy and included files
 
-This repository contains only original source and project files. It intentionally does **not** include Rumble Club, Unity, Cinemachine, MelonLoader, or generated IL2CPP binaries.
+The source tree contains only original project files. It does not include game-owned, Unity, Cinemachine, MelonLoader, or generated IL2CPP libraries. The `download` directory contains only the compiled RumbleCameraMod binary.
 
 ## License
 
