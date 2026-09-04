@@ -1,0 +1,27 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+
+# IDEs
+.vscode/
+.idea/
+
+# Generated and game-owned binaries
+*.dll
+*.pdb
+*.deps.json
+MelonLoader/
+Il2CppAssemblies/
+Mods/
+
+# OS files
+Thumbs.db
+.DS_Store
