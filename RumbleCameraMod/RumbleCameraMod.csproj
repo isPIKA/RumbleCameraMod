@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>CameraMod</RootNamespace>
+    <AssemblyName>RumbleCameraMod</AssemblyName>
+
+    <RumbleClubDir Condition="'$(RumbleClubDir)' == ''">$(ProgramFiles(x86))\Steam\steamapps\common\Rumble Club</RumbleClubDir>
+    <MelonLoaderDir>$(RumbleClubDir)\MelonLoader\net6</MelonLoaderDir>
+    <Il2CppAssembliesDir>$(RumbleClubDir)\MelonLoader\Il2CppAssemblies</Il2CppAssembliesDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MelonLoader" HintPath="$(MelonLoaderDir)\MelonLoader.dll" Private="false" />
+    <Reference Include="Il2CppInterop.Runtime" HintPath="$(MelonLoaderDir)\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="Il2Cppmscorlib" HintPath="$(Il2CppAssembliesDir)\Il2Cppmscorlib.dll" Private="false" />
+    <Reference Include="Il2CppPunchGameAssembly" HintPath="$(Il2CppAssembliesDir)\Il2CppPunchGameAssembly.dll" Private="false" />
+    <Reference Include="Il2CppCinemachine" HintPath="$(Il2CppAssembliesDir)\Il2CppCinemachine.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(Il2CppAssembliesDir)\UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(Il2CppAssembliesDir)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(Il2CppAssembliesDir)\UnityEngine.InputLegacyModule.dll" Private="false" />
+  </ItemGroup>
+</Project>
